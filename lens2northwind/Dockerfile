@@ -40,4 +40,4 @@ ADD  server $RDF4J_DATA/server
 VOLUME ${RDF4J_DATA}
 EXPOSE 8080
 
-LABEL peterlawrence/lens2northwind:latest
+LABEL lens2northwind:latest inova8/lens2northwind:latest
