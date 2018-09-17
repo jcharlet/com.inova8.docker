@@ -1,8 +1,8 @@
-FROM tomcat:9.0.7
+FROM tomcat:9-jre8
 
 MAINTAINER Peter Lawrence "peter.lawrence@inova8.com"
 
-ENV RDF4J_VERSION="2.3.2" 
+ARG RDF4J_VERSION="2.4.0-M3" 
 ENV RDF4J_DATA="/opt/eclipse-rdf4j-${RDF4J_VERSION}/data" 
 ENV JVM_PARAMS="-Xmx4g" 
 

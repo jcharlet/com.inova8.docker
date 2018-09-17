@@ -6,14 +6,14 @@
 @prefix sr: <http://www.openrdf.org/config/repository/sail#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<#NHS> a rep:Repository;
+<#NHSModel> a rep:Repository;
   rep:repositoryID "NHSModel";
   rep:repositoryImpl [
       rep:repositoryType "openrdf:SailRepository";
       sr:sailImpl [
           sail:sailType "openrdf:NativeStore";
           sb:evaluationStrategyFactory "org.eclipse.rdf4j.query.algebra.evaluation.impl.StrictEvaluationStrategyFactory";
-          ns:tripleIndexes "spoc,posc"
+          ns:tripleIndexes "spoc,posc,ospc,sopc,opsc,psoc"
         ]
     ];
-  rdfs:label "NHS" .
+  rdfs:label "NHSModel" .
