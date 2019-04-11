@@ -1,0 +1,105 @@
+# baseURI: http://inova8.com/odata4sparql/models
+# imports: http://inova8.com/odata4sparql
+
+@prefix : <http://inova8.com/odata4sparql/models#> .
+@prefix odata4sparql: <http://inova8.com/odata4sparql#> .
+@prefix openrdf: <http://www.openrdf.org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rep: <http://www.openrdf.org/config/repository#> .
+@prefix sparql: <http://www.openrdf.org/config/repository/sparql#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+odata4sparql:FOAF
+  rdf:type odata4sparql:Prefix ;
+  odata4sparql:namespace <http://xmlns.com/foaf/0.1/> ;
+  odata4sparql:prefix "foaf"^^xsd:string ;
+.
+odata4sparql:OEXT
+  rdf:type odata4sparql:Prefix ;
+  odata4sparql:namespace <http://oracle.com/semtech/jena-adaptor/ext/function#> ;
+  odata4sparql:prefix "OEXT"^^xsd:string ;
+.
+odata4sparql:ORACLE_SEM_FS_NS
+  rdf:type odata4sparql:Prefix ;
+  odata4sparql:namespace <http://oracle.com/semtech#timeout=100,qid=123> ;
+  odata4sparql:prefix "ORACLE_SEM_FS_NS"^^xsd:string ;
+.
+odata4sparql:OUEXT
+  rdf:type odata4sparql:Prefix ;
+  odata4sparql:namespace <http://oracle.com/semtech/jena-adaptor/ext/user-def-function#> ;
+  odata4sparql:prefix "OUEXT"^^xsd:string ;
+.
+<http://inova8.com/odata4sparql/models>
+  rdf:type owl:Ontology ;
+  owl:imports <http://inova8.com/odata4sparql> ;
+.
+:FN
+  rdf:type odata4sparql:Prefix ;
+  odata4sparql:namespace <http://www.w3.org/2005/xpath-functions#> ;
+  odata4sparql:prefix "FN"^^xsd:string ;
+.
+:NWD
+  rdf:type odata4sparql:Prefix ;
+  odata4sparql:namespace <http://northwind.com/> ;
+  odata4sparql:prefix "NWD"^^xsd:string ;
+.
+
+:northwind
+  rdf:type odata4sparql:Dataset ;
+  rdf:type odata4sparql:Prefix ;
+  odata4sparql:dataRepository :northwind_Data ;
+  odata4sparql:vocabularyRepository :northwind_Vocabulary ;
+  odata4sparql:datasetPrefix odata4sparql:FOAF ;
+  odata4sparql:datasetPrefix odata4sparql:OWL ;
+  odata4sparql:datasetPrefix odata4sparql:RDFS ;
+  odata4sparql:datasetPrefix odata4sparql:SKOS ;
+  odata4sparql:datasetPrefix odata4sparql:GEO ;
+  odata4sparql:datasetPrefix odata4sparql:SEARCH ;
+  odata4sparql:datasetPrefix odata4sparql:QB ;
+  odata4sparql:datasetPrefix odata4sparql:DATACUBE ;
+  odata4sparql:datasetPrefix odata4sparql:CONTEXTMENU ;  
+  odata4sparql:datasetPrefix :northwind ;
+  odata4sparql:datasetPrefix :NWD ;
+  odata4sparql:defaultPrefix :northwind ;
+  odata4sparql:namespace <http://northwind.com/model/> ;
+  odata4sparql:prefix "northwind"^^xsd:string ;
+  odata4sparql:withRdfAnnotations "false"^^xsd:boolean ;
+  odata4sparql:withSapAnnotations "false"^^xsd:boolean ;
+  odata4sparql:useBaseType "false"^^xsd:boolean ;
+  odata4sparql:expandOperations "false"^^xsd:boolean ;
+  odata4sparql:textSearchType odata4sparql:RDF4J_Lucene ;
+  rdfs:label "northwind"^^xsd:string ;
+.
+
+:northwind_Data
+  rdf:type rep:Repository ;
+  rep:repositoryID "northwind_Data"^^xsd:string ;
+  rep:repositoryImpl :northwind_Data_Impl ;
+  rdfs:label "northwind Data"^^xsd:string ;
+.
+:northwind_Data_Impl
+  rdf:type openrdf:SPARQLRepository ;
+  odata4sparql:defaultQueryLimit 100000 ;
+  odata4sparql:sparqlProfile odata4sparql:RDF4J ;
+  rep:repositoryType openrdf:SPARQLRepository ;
+  sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/northwind?distinct=true>;
+  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/northwind> ;
+  rdfs:label "northwind Data Impl"^^xsd:string ;
+.
+:northwind_Vocabulary
+  rdf:type rep:Repository ;
+  rep:repositoryID "northwind_Vocabulary"^^xsd:string ;
+  rep:repositoryImpl :northwind_Vocabulary_Impl ;
+  rdfs:label "northwind Vocabulary"^^xsd:string ;
+.
+:northwind_Vocabulary_Impl
+  rdf:type openrdf:SPARQLRepository ;
+  odata4sparql:sparqlProfile odata4sparql:RDF4J ;
+  rep:repositoryType openrdf:SPARQLRepository ;
+  sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/northwind> ;
+  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/northwind> ;
+  rdfs:label "northwind Vocabulary Impl"^^xsd:string ;
+.
+

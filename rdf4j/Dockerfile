@@ -2,7 +2,7 @@ FROM tomcat:9-jre8
 
 MAINTAINER Peter Lawrence "peter.lawrence@inova8.com"
 
-ARG RDF4J_VERSION="2.4.0-M3" 
+ARG RDF4J_VERSION="2.5.1" 
 ENV RDF4J_DATA="/opt/eclipse-rdf4j-${RDF4J_VERSION}/data" 
 ENV JVM_PARAMS="-Xmx4g" 
 
@@ -22,3 +22,4 @@ ADD  context.xml  /usr/local/tomcat/webapps/manager/META-INF/context.xml
 # Publish RDF4J data volumes
 VOLUME ${RDF4J_DATA}
 EXPOSE 8080
+LABEL rdf4j:latest inova8/rdf4j:latest

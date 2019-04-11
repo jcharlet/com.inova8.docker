@@ -3,12 +3,13 @@ FROM tomcat:9-jre8
 MAINTAINER Peter Lawrence "peter.lawrence@inova8.com"
 
 # Setup variables
-ARG RDF4J_VERSION="2.4.0-M3" 
+ARG RDF4J_VERSION="2.5.1" 
 ENV RDF4J_DATA="/opt/eclipse-rdf4j-${RDF4J_VERSION}/data" 
 ARG JVM_PARAMS="-Xmx4g" 
 ENV ODATA4SPARQL ="C:/Users/Peter/git/com.inova8.odata2sparql.v4/odata2sparql.v4/target/"
 ENV FRAMEWORK ="C:/Apps/SAPWebIDE/serverworkspace/pe/peterlawrence1/OrionContent/com.inova8.lens.framework.v4/target/"
 ENV SERVER ="C:/Users/Peter/AppData/Roaming/rdf4j/data/server"
+ENV MODELS="/var/opt/inova8/odata2sparql/V4" 
 
 # Install the lastest RDF4J server and workbench
 RUN curl -sS -o /tmp/rdf4j.zip -L http://download.eclipse.org/rdf4j/eclipse-rdf4j-${RDF4J_VERSION}-sdk.zip && \
@@ -39,6 +40,7 @@ ADD  server $RDF4J_DATA/server
 
 # Publish RDF4J data volumes
 VOLUME ${RDF4J_DATA}
+VOLUME ${MODELS}
 EXPOSE 8080
 
 LABEL lens2northwind:latest inova8/lens2northwind:latest

@@ -11,26 +11,6 @@
 @prefix sparql: <http://www.openrdf.org/config/repository/sparql#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-odata4sparql:FOAF
-  rdf:type odata4sparql:Prefix ;
-  odata4sparql:namespace <http://xmlns.com/foaf/0.1/> ;
-  odata4sparql:prefix "foaf"^^xsd:string ;
-.
-odata4sparql:OEXT
-  rdf:type odata4sparql:Prefix ;
-  odata4sparql:namespace <http://oracle.com/semtech/jena-adaptor/ext/function#> ;
-  odata4sparql:prefix "OEXT"^^xsd:string ;
-.
-odata4sparql:ORACLE_SEM_FS_NS
-  rdf:type odata4sparql:Prefix ;
-  odata4sparql:namespace <http://oracle.com/semtech#timeout=100,qid=123> ;
-  odata4sparql:prefix "ORACLE_SEM_FS_NS"^^xsd:string ;
-.
-odata4sparql:OUEXT
-  rdf:type odata4sparql:Prefix ;
-  odata4sparql:namespace <http://oracle.com/semtech/jena-adaptor/ext/user-def-function#> ;
-  odata4sparql:prefix "OUEXT"^^xsd:string ;
-.
 <http://inova8.com/odata4sparql/models>
   rdf:type owl:Ontology ;
   owl:imports <http://inova8.com/odata4sparql> ;
@@ -40,66 +20,21 @@ odata4sparql:OUEXT
   odata4sparql:namespace <http://www.w3.org/2005/xpath-functions#> ;
   odata4sparql:prefix "FN"^^xsd:string ;
 .
+:NW
+  rdf:type odata4sparql:Prefix ;
+  odata4sparql:namespace <http://northwind.com/model/> ;
+  odata4sparql:prefix "northwind"^^xsd:string ;
+.
 :NWD
   rdf:type odata4sparql:Prefix ;
   odata4sparql:namespace <http://northwind.com/> ;
   odata4sparql:prefix "NWD"^^xsd:string ;
 .
-
-:NW
-  rdf:type odata4sparql:Dataset ;
+:SHAPES
   rdf:type odata4sparql:Prefix ;
-  odata4sparql:dataRepository :NW_Data ;
-  odata4sparql:vocabularyRepository :NW_Vocabulary ;
-  odata4sparql:datasetPrefix odata4sparql:FOAF ;
-  odata4sparql:datasetPrefix odata4sparql:OWL ;
-  odata4sparql:datasetPrefix odata4sparql:RDFS ;
-  odata4sparql:datasetPrefix odata4sparql:SKOS ;
-  odata4sparql:datasetPrefix odata4sparql:GEO ;
-  odata4sparql:datasetPrefix odata4sparql:SEARCH ;
-  odata4sparql:datasetPrefix :NW ;
-  odata4sparql:datasetPrefix :NWD ;
-  odata4sparql:defaultPrefix :NW ;
-  odata4sparql:namespace <http://northwind.com/model/> ;
-  odata4sparql:prefix "northwind"^^xsd:string ;
-  odata4sparql:withRdfAnnotations "false"^^xsd:boolean ;
-  odata4sparql:withSapAnnotations "false"^^xsd:boolean ;
-  odata4sparql:useBaseType "false"^^xsd:boolean ;
-  odata4sparql:expandOperations "false"^^xsd:boolean ;
-  odata4sparql:textSearchType odata4sparql:RDF4J_Lucene ;
-  rdfs:label "Northwind"^^xsd:string ;
+  odata4sparql:namespace <http://northwind.com/shapes/> ;
+  odata4sparql:prefix "shapes"^^xsd:string ;
 .
-
-:NW_Data
-  rdf:type rep:Repository ;
-  rep:repositoryID "NW_Data"^^xsd:string ;
-  rep:repositoryImpl :NW_Data_Impl ;
-  rdfs:label "NW Data"^^xsd:string ;
-.
-:NW_Data_Impl
-  rdf:type openrdf:SPARQLRepository ;
-  odata4sparql:defaultQueryLimit 100000 ;
-  odata4sparql:sparqlProfile odata4sparql:RDF4J ;
-  rep:repositoryType openrdf:SPARQLRepository ;
-  sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/NW?distinct=true>;
-  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/NW> ;
-  rdfs:label "NW Data Impl"^^xsd:string ;
-.
-:NW_Vocabulary
-  rdf:type rep:Repository ;
-  rep:repositoryID "NW_Vocabulary"^^xsd:string ;
-  rep:repositoryImpl :NW_Vocabulary_Impl ;
-  rdfs:label "NW Vocabulary"^^xsd:string ;
-.
-:NW_Vocabulary_Impl
-  rdf:type openrdf:SPARQLRepository ;
-  odata4sparql:sparqlProfile odata4sparql:RDF4J ;
-  rep:repositoryType openrdf:SPARQLRepository ;
-  sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/NW> ;
-  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/NW> ;
-  rdfs:label "NW Vocabulary Impl"^^xsd:string ;
-.
-
 :northwind
   rdf:type odata4sparql:Dataset ;
   rdf:type odata4sparql:Prefix ;
@@ -114,13 +49,17 @@ odata4sparql:OUEXT
   odata4sparql:datasetPrefix odata4sparql:QB ;
   odata4sparql:datasetPrefix odata4sparql:DATACUBE ;
   odata4sparql:datasetPrefix odata4sparql:CONTEXTMENU ;  
-  odata4sparql:datasetPrefix :NW ;
+  odata4sparql:datasetPrefix :northwind ;
   odata4sparql:datasetPrefix :NWD ;
-  odata4sparql:defaultPrefix :NW ;
+  odata4sparql:datasetPrefix :SHAPES ;
+  odata4sparql:defaultPrefix :northwind ;
   odata4sparql:namespace <http://northwind.com/model/> ;
   odata4sparql:prefix "northwind"^^xsd:string ;
   odata4sparql:withRdfAnnotations "false"^^xsd:boolean ;
-  odata4sparql:withSapAnnotations "true"^^xsd:boolean ;
+  odata4sparql:withSapAnnotations "false"^^xsd:boolean ;
+  odata4sparql:withFKProperties "true"^^xsd:boolean ;
+  odata4sparql:withMatching "true"^^xsd:boolean ;
+  odata4sparql:match "{ key1 (<http://www.w3.org/2004/02/skos/core#exactMatch> | ^ <http://www.w3.org/2004/02/skos/core#exactMatch>)* key2 }"^^xsd:string ;
   odata4sparql:useBaseType "false"^^xsd:boolean ;
   odata4sparql:expandOperations "false"^^xsd:boolean ;
   odata4sparql:textSearchType odata4sparql:RDF4J_Lucene ;
@@ -157,186 +96,340 @@ odata4sparql:OUEXT
   rdfs:label "northwind Vocabulary Impl"^^xsd:string ;
 .
 
-:cust360
-  rdf:type odata4sparql:Prefix ;
-  odata4sparql:namespace <http://nexifysolutions.com/customer360/ref/> ;
-  odata4sparql:prefix "cust360"^^xsd:string ;
-.
-
-:odsid
-  rdf:type odata4sparql:Prefix ;
-  odata4sparql:namespace <http://nexifysolutions.com/Customer360/ods/id/> ;
-  odata4sparql:prefix "odsid"^^xsd:string ;
-.
-
-:sfdc
-  rdf:type odata4sparql:Prefix ;
-  odata4sparql:namespace <http://nexifysolutions.com/salesforce/ref/> ;
-  odata4sparql:prefix "sfdc"^^xsd:string ;
-.
-
-:Cust360Demo
+:BeCareLinkData
+  rdf:type odata4sparql:Prefix ; 
+   odata4sparql:namespace <http://nexifysolutions.com/BeCareLink/data/> ;
+   odata4sparql:prefix "BeCareLinkData"^^xsd:string ;
+ .
+:BeCareLink
   rdf:type odata4sparql:Dataset ;
   rdf:type odata4sparql:Prefix ;
-  odata4sparql:dataRepository :Cust360Demo_Data ;
-  odata4sparql:vocabularyRepository :Cust360Demo_Vocabulary ;
-  odata4sparql:datasetPrefix odata4sparql:FOAF ;
-  odata4sparql:datasetPrefix odata4sparql:OWL ;
-  odata4sparql:datasetPrefix odata4sparql:RDFS ;
-  odata4sparql:datasetPrefix odata4sparql:SKOS ;
-  odata4sparql:datasetPrefix odata4sparql:SEARCH ;
-  odata4sparql:datasetPrefix :cust360 ;
-  odata4sparql:datasetPrefix :sfdc ;
-  odata4sparql:defaultPrefix :sfdc ;
-  odata4sparql:namespace <http://nexifysolutions.com/customer360/ref/> ;
-  odata4sparql:prefix "Cust360Demo"^^xsd:string ;
-  odata4sparql:withRdfAnnotations "false"^^xsd:boolean ;
-  odata4sparql:withSapAnnotations "false"^^xsd:boolean ;
-  odata4sparql:useBaseType "false"^^xsd:boolean ;
-  odata4sparql:expandOperations "false"^^xsd:boolean ;
-  odata4sparql:textSearchType odata4sparql:Halyard_ElasticSearch ;
-  rdfs:label "Cust360Demo"^^xsd:string ;
-.
-:Cust360Demo_Data
-  rdf:type rep:Repository ;
-  rep:repositoryID "Cust360Demo_Data"^^xsd:string ;
-  rep:repositoryImpl :Cust360Demo_Data_Impl ;
-  rdfs:label "Cust360Demo Data"^^xsd:string ;
-.
-:Cust360Demo_Data_Impl
-  rdf:type openrdf:SPARQLRepository ;
-  odata4sparql:defaultQueryLimit 100000 ;
-  odata4sparql:sparqlProfile odata4sparql:RDF4J ;
-  rep:repositoryType openrdf:SPARQLRepository ;
-  sparql:query-endpoint <http://35.230.132.166:8080/rdf4j-server/repositories/Cust360Demo?distinct=true>;
-  sparql:update-endpoint <http://35.230.132.166:8080/rdf4j-server/repositories/Cust360Demo> ;
-  rdfs:label "Cust360Demo Data Impl"^^xsd:string ;
-.
-:Cust360Demo_Vocabulary
-  rdf:type rep:Repository ;
-  rep:repositoryID "Cust360Demo_Vocabulary"^^xsd:string ;
-  rep:repositoryImpl :Cust360Demo_Vocabulary_Impl ;
-  rdfs:label "Cust360Demo Vocabulary"^^xsd:string ;
-.  
-:Cust360Demo_Vocabulary_Impl
-  rdf:type openrdf:SPARQLRepository ;
-  odata4sparql:sparqlProfile odata4sparql:RDF4J ;
-  rep:repositoryType openrdf:SPARQLRepository ;
-  sparql:query-endpoint <http://35.230.132.166:8080/rdf4j-server/repositories/Cust360Demo> ;
-  sparql:update-endpoint <http://35.230.132.166:8080/rdf4j-server/repositories/Cust360Demo> ;
-  rdfs:label "Cust360Demo Vocabulary Impl"^^xsd:string ;
-.
-
-:NHS
-  rdf:type odata4sparql:Prefix ;
-  odata4sparql:namespace <http://nexifysolutions.com/Customer360/ods/ref/>  ;
-  odata4sparql:prefix "NHS"^^xsd:string ;
-  rdf:type odata4sparql:Dataset ;
-  odata4sparql:dataRepository :NHS_Data ;
-  odata4sparql:vocabularyRepository :NHS_Vocabulary ;
-  odata4sparql:datasetPrefix odata4sparql:FOAF ;
-  odata4sparql:datasetPrefix odata4sparql:OWL ;
-  odata4sparql:datasetPrefix odata4sparql:RDFS ;
-  odata4sparql:datasetPrefix odata4sparql:SKOS ;
-  odata4sparql:datasetPrefix odata4sparql:SEARCH ;
-  odata4sparql:datasetPrefix odata4sparql:GEO ;
-  odata4sparql:datasetPrefix odata4sparql:QB ;
-  odata4sparql:datasetPrefix odata4sparql:DATACUBE ;
-  odata4sparql:datasetPrefix odata4sparql:CONTEXTMENU ; 
-  odata4sparql:datasetPrefix :cust360 ;
-  odata4sparql:datasetPrefix :odsid ;
-  odata4sparql:datasetPrefix :sfdc ;
-  odata4sparql:defaultPrefix :NHS ;
-  odata4sparql:withRdfAnnotations "false"^^xsd:boolean ;
-  odata4sparql:withSapAnnotations "true"^^xsd:boolean ;
-  odata4sparql:useBaseType "false"^^xsd:boolean ;
-  odata4sparql:expandOperations "false"^^xsd:boolean ;
-  odata4sparql:textSearchType odata4sparql:Halyard_ElasticSearch ;
-  rdfs:label "NHS"^^xsd:string ;
-.
-:NHS_Data
-  rdf:type rep:Repository ;
-  rep:repositoryID "NHS_Data"^^xsd:string ;
-  rep:repositoryImpl :NHS_Data_Impl ;
-  rdfs:label "NHS Data"^^xsd:string ;
-.
-:NHS_Data_Impl
-  rdf:type openrdf:SPARQLRepository ;
-  odata4sparql:defaultQueryLimit 100000 ;
-  odata4sparql:sparqlProfile odata4sparql:RDF4J ;
-  rep:repositoryType openrdf:SPARQLRepository ;
-  sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/NHSSplit?distinct=true>;
-  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/NHSSplit> ;
-  rdfs:label "NHS Data Impl"^^xsd:string ;
-.
-:NHS_Vocabulary
-  rdf:type rep:Repository ;
-  rep:repositoryID "NHS_Vocabulary"^^xsd:string ;
-  rep:repositoryImpl :NHS_Vocabulary_Impl ;
-  rdfs:label "NHS Vocabulary"^^xsd:string ;
-.
-:NHS_Vocabulary_Impl
-  rdf:type openrdf:SPARQLRepository ;
-  odata4sparql:sparqlProfile odata4sparql:RDF4J ;
-  rep:repositoryType openrdf:SPARQLRepository ;
-  sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/NHSModel?distinct=true&infer=false> ;
-  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/NHSModel> ;
-  rdfs:label "NHS Vocabulary Impl"^^xsd:string ;
-.
-
-:NHS360
-  rdf:type odata4sparql:Dataset ;
-  rdf:type odata4sparql:Prefix ;
-  odata4sparql:dataRepository :NHS360_Data ;
-  odata4sparql:vocabularyRepository :NHS360_Vocabulary ;
+  odata4sparql:dataRepository :BeCareLink_Data ;
+  odata4sparql:vocabularyRepository :BeCareLink_Vocabulary ;
   odata4sparql:datasetPrefix odata4sparql:FOAF ;
   odata4sparql:datasetPrefix odata4sparql:OWL ;
   odata4sparql:datasetPrefix odata4sparql:RDFS ;
   odata4sparql:datasetPrefix odata4sparql:SKOS ;   
   odata4sparql:datasetPrefix odata4sparql:SEARCH ;  
-  odata4sparql:datasetPrefix :cust360 ;
+  odata4sparql:datasetPrefix odata4sparql:GEO ;
+  odata4sparql:datasetPrefix odata4sparql:QB ;
+  odata4sparql:datasetPrefix odata4sparql:DATACUBE ;
+  odata4sparql:datasetPrefix odata4sparql:CONTEXTMENU ; 
   odata4sparql:datasetPrefix :NHS ;
   odata4sparql:datasetPrefix :odsid ;
   odata4sparql:datasetPrefix :sfdc ;
-  odata4sparql:datasetPrefix :NHS360 ;
-  odata4sparql:defaultPrefix :cust360 ;
-  odata4sparql:namespace <http://nexifysolutions.com/customer360/ref/> ;
-  odata4sparql:prefix "NHS360"^^xsd:string ;
+  odata4sparql:datasetPrefix :BeCareLink ;
+  odata4sparql:datasetPrefix :BeCareLinkData ;
+  odata4sparql:defaultPrefix :BeCareLink ;
+  odata4sparql:namespace <http://nexifysolutions.com/BeCareLink/Schema/BeCareLink#> ;
+  odata4sparql:prefix "BeCareLink"^^xsd:string ;
   odata4sparql:withRdfAnnotations "false"^^xsd:boolean ;
-  odata4sparql:withSapAnnotations "false"^^xsd:boolean ;
+  odata4sparql:withSapAnnotations "true"^^xsd:boolean ;
+  odata4sparql:withFKProperties "true"^^xsd:boolean ;
   odata4sparql:useBaseType "false"^^xsd:boolean ;
   odata4sparql:expandOperations "false"^^xsd:boolean ;
-  odata4sparql:textSearchType odata4sparql:Halyard_ElasticSearch ;
-  rdfs:label "NHS360"^^xsd:string ;
+  odata4sparql:textSearchType odata4sparql:RDF4J_Lucene ;
+  rdfs:label "BeCareLink"^^xsd:string ;
 .
-:NHS360_Data
-  rdf:type rep:Repository ;
-  rep:repositoryID "NHS360_Data"^^xsd:string ;
-  rep:repositoryImpl :NHS360_Data_Impl ;
-  rdfs:label "NHS360 Data"^^xsd:string ;
+:BeCareLink_Data
+  rdf:type rep:Repository ; 
+  rep:repositoryID "BeCareLink_Data"^^xsd:string ;
+  rep:repositoryImpl :BeCareLink_Data_Impl ;
+  rdfs:label "BeCareLink Data"^^xsd:string ;
 .
-:NHS360_Data_Impl
+:BeCareLink_Data_Impl
   rdf:type openrdf:SPARQLRepository ;
   odata4sparql:defaultQueryLimit 100000 ;
   odata4sparql:sparqlProfile odata4sparql:RDF4J ;
   rep:repositoryType openrdf:SPARQLRepository ;
-  sparql:query-endpoint <http://35.230.132.166:8080/rdf4j-server/repositories/NHSCust360?distinct=true>;
-  sparql:update-endpoint <http://35.230.132.166:8080/rdf4j-server/repositories/NHSCust360> ;
-  rdfs:label "NHS360 Data Impl"^^xsd:string ;
+  sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/BeCareLink?distinct=true>;
+  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/BeCareLink> ;
+  rdfs:label "BeCareLink Data Impl"^^xsd:string ;
 .
-:NHS360_Vocabulary
+:BeCareLink_Vocabulary
   rdf:type rep:Repository ;
-  rep:repositoryID "NHS360_Vocabulary"^^xsd:string ;
-  rep:repositoryImpl :NHS360_Vocabulary_Impl ;
-  rdfs:label "NHS Vocabulary"^^xsd:string ;
+  rep:repositoryID "BeCareLink_Vocabulary"^^xsd:string ;
+  rep:repositoryImpl :BeCareLink_Vocabulary_Impl ;
+  rdfs:label "BeCareLink Vocabulary"^^xsd:string ;
 .
-:NHS360_Vocabulary_Impl
+:BeCareLink_Vocabulary_Impl
   rdf:type openrdf:SPARQLRepository ;
   odata4sparql:sparqlProfile odata4sparql:RDF4J ;
   rep:repositoryType openrdf:SPARQLRepository ;
-  sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/NHS360?infer=false> ;
-  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/NHS360> ;
-    sparql:query-endpoint1 <http://35.230.132.166:8080/rdf4j-server/repositories/NHS360MODEL?infer=false> ;
-  sparql:update-endpoint1 <http://35.230.132.166:8080/rdf4j-server/repositories/NHS360MODEL> ;
-  rdfs:label "NHS360 Vocabulary Impl"^^xsd:string ;
+  sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/BeCareLink?infer=false> ;
+  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/BeCareLink> ;
+  rdfs:label "cust360 Vocabulary Impl"^^xsd:string ;
+.
+:SWTTHES
+  rdf:type odata4sparql:Prefix ; 
+   odata4sparql:namespace <http://zbw.eu/stw/thsys/> ;
+   odata4sparql:prefix "SWTTHES"^^xsd:string ;
+ .
+:ZBWEXT
+  rdf:type odata4sparql:Prefix ; 
+   odata4sparql:namespace <http://zbw.eu/namespaces/zbw-extensions/> ;
+   odata4sparql:prefix "ZBWEXT"^^xsd:string ;
+ .
+:STW
+  rdf:type odata4sparql:Dataset ;
+  rdf:type odata4sparql:Prefix ;
+  odata4sparql:dataRepository :STW_Data ;
+  odata4sparql:vocabularyRepository :STW_Vocabulary ;
+  odata4sparql:datasetPrefix odata4sparql:FOAF ;
+  odata4sparql:datasetPrefix odata4sparql:OWL ;
+  odata4sparql:datasetPrefix odata4sparql:RDFS ;
+  odata4sparql:datasetPrefix odata4sparql:SKOS ;   
+  odata4sparql:datasetPrefix odata4sparql:SEARCH ;  
+  odata4sparql:datasetPrefix odata4sparql:GEO ;
+  odata4sparql:datasetPrefix odata4sparql:QB ;
+  odata4sparql:datasetPrefix odata4sparql:DATACUBE ;
+  odata4sparql:datasetPrefix odata4sparql:CONTEXTMENU ; 
+  odata4sparql:datasetPrefix :NHS ;
+  odata4sparql:datasetPrefix :odsid ;
+  odata4sparql:datasetPrefix :sfdc ;
+  odata4sparql:datasetPrefix :STW ;
+  odata4sparql:datasetPrefix :SWTTHES;
+  odata4sparql:datasetPrefix :ZBWEXT;
+  odata4sparql:defaultPrefix odata4sparql:SKOS  ;
+  odata4sparql:namespace <http://zbw.eu/stw/descriptor/> ;
+  odata4sparql:prefix "STW"^^xsd:string ;
+  odata4sparql:withRdfAnnotations "false"^^xsd:boolean ;
+  odata4sparql:withSapAnnotations "false"^^xsd:boolean ;
+  odata4sparql:withFKProperties "false"^^xsd:boolean ;
+  odata4sparql:useBaseType "false"^^xsd:boolean ;
+  odata4sparql:expandOperations "false"^^xsd:boolean ;
+  odata4sparql:textSearchType odata4sparql:RDF4J_Lucene ;
+  rdfs:label "STW"^^xsd:string ;
+.
+:STW_Data
+  rdf:type rep:Repository ; 
+  rep:repositoryID "STW_Data"^^xsd:string ;
+  rep:repositoryImpl :STW_Data_Impl ;
+  rdfs:label "STW Data"^^xsd:string ;
+.
+:STW_Data_Impl
+  rdf:type openrdf:SPARQLRepository ;
+  odata4sparql:defaultQueryLimit 100000 ;
+  odata4sparql:sparqlProfile odata4sparql:RDF4J ;
+  rep:repositoryType openrdf:SPARQLRepository ;
+  sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/STW?distinct=true>;
+  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/STW> ;
+  rdfs:label "STW Data Impl"^^xsd:string ;
+.
+:STW_Vocabulary
+  rdf:type rep:Repository ;
+  rep:repositoryID "STW_Vocabulary"^^xsd:string ;
+  rep:repositoryImpl :STW_Vocabulary_Impl ;
+  rdfs:label "STW Vocabulary"^^xsd:string ;
+.
+:STW_Vocabulary_Impl
+  rdf:type openrdf:SPARQLRepository ;
+  odata4sparql:sparqlProfile odata4sparql:RDF4J ;
+  rep:repositoryType openrdf:SPARQLRepository ;
+  sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/STW?infer=false> ;
+  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/STW> ;
+  rdfs:label "STW Vocabulary Impl"^^xsd:string ;
+.
+:CDATA
+  rdf:type odata4sparql:Prefix ; 
+   odata4sparql:namespace <http://nexifysolutions.com/cofid/id/> ;
+   odata4sparql:prefix "CDATA"^^xsd:string ;
+.
+:COFID
+  rdf:type odata4sparql:Dataset ;
+  rdf:type odata4sparql:Prefix ;
+  odata4sparql:datasetPrefix :COFID  ;
+  odata4sparql:defaultPrefix :COFID  ;
+  odata4sparql:namespace <http://nexifysolutions.com/cofid/ref/> ;
+  odata4sparql:prefix "COFID"^^xsd:string ;
+  rdfs:label "COFID"^^xsd:string ;
+  odata4sparql:dataRepository :COFID_Data ;
+  odata4sparql:vocabularyRepository :COFID_Vocabulary ;
+  odata4sparql:datasetPrefix :CDATA ; 
+  odata4sparql:datasetPrefix odata4sparql:FOAF ;
+  odata4sparql:datasetPrefix odata4sparql:OWL ;
+  odata4sparql:datasetPrefix odata4sparql:RDFS ;
+  odata4sparql:datasetPrefix odata4sparql:SKOS ;   
+  odata4sparql:datasetPrefix odata4sparql:SEARCH ;  
+  odata4sparql:datasetPrefix odata4sparql:GEO ;
+  odata4sparql:datasetPrefix odata4sparql:QB ;
+  odata4sparql:datasetPrefix odata4sparql:DATACUBE ;
+  odata4sparql:datasetPrefix odata4sparql:CONTEXTMENU ; 
+  odata4sparql:withRdfAnnotations "false"^^xsd:boolean ;
+  odata4sparql:withSapAnnotations "true"^^xsd:boolean ;
+  odata4sparql:withFKProperties "false"^^xsd:boolean ;
+  odata4sparql:useBaseType "false"^^xsd:boolean ;
+  odata4sparql:expandOperations "false"^^xsd:boolean ;
+  odata4sparql:textSearchType odata4sparql:RDF4J_Lucene ;
+.
+:COFID_Data
+  rdf:type rep:Repository ; 
+  rep:repositoryID "COFID_Data"^^xsd:string ;
+  rep:repositoryImpl :COFID_Data_Impl ;
+  rdfs:label "COFID Data"^^xsd:string ;
+.
+:COFID_Data_Impl
+  rdf:type openrdf:SPARQLRepository ;
+  odata4sparql:defaultQueryLimit 100000 ;
+  odata4sparql:sparqlProfile odata4sparql:RDF4J ;
+  rep:repositoryType openrdf:SPARQLRepository ;
+  sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/cofid?distinct=true>;
+  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/cofid> ;
+  rdfs:label "COFID Data Impl"^^xsd:string ;
+.
+:COFID_Vocabulary
+  rdf:type rep:Repository ;
+  rep:repositoryID "COFID_Vocabulary"^^xsd:string ;
+  rep:repositoryImpl :COFID_Vocabulary_Impl ;
+  rdfs:label "COFID Vocabulary"^^xsd:string ;
+.
+:COFID_Vocabulary_Impl
+  rdf:type openrdf:SPARQLRepository ;
+  odata4sparql:sparqlProfile odata4sparql:RDF4J ;
+  rep:repositoryType openrdf:SPARQLRepository ;
+  sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/cofid?infer=false> ;
+  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/cofid> ;
+  rdfs:label "COFID Vocabulary Impl"^^xsd:string ;
+.
+:s
+  rdf:type odata4sparql:Prefix ; 
+   odata4sparql:namespace <http://inova8.com/skos+owl+prov/skos#> ;
+   odata4sparql:prefix "s"^^xsd:string ;
+ .
+:so
+  rdf:type odata4sparql:Prefix ; 
+   odata4sparql:namespace <http://inova8.com/skos+owl+prov/skos+owl#> ;
+   odata4sparql:prefix "so"^^xsd:string ;
+ .
+:sop
+  rdf:type odata4sparql:Prefix ; 
+   odata4sparql:namespace <http://inova8.com/skos+owl+prov/skos+owl+prov#> ;
+   odata4sparql:prefix "sop"^^xsd:string ;
+ . 
+:sopq
+  rdf:type odata4sparql:Prefix ; 
+   odata4sparql:namespace <http://inova8.com/skos+owl+prov/skos+owl+provqualified#> ;
+   odata4sparql:prefix "sopq"^^xsd:string ;
+ .
+:rdf2model
+  rdf:type odata4sparql:Dataset ;
+  rdf:type odata4sparql:Prefix ;
+  odata4sparql:datasetPrefix :rdf2model  ;
+  odata4sparql:defaultPrefix :rdf2model  ;
+  odata4sparql:namespace <http://inova8.com/skos+owl+prov/skos#> ;
+  odata4sparql:prefix "rdf2model"^^xsd:string ;
+  rdfs:label "rdf2model"^^xsd:string ;
+  odata4sparql:dataRepository :rdf2model_Data ;
+  odata4sparql:vocabularyRepository :rdf2model_Vocabulary ;
+  odata4sparql:datasetPrefix :s ;
+  odata4sparql:datasetPrefix :so ;
+  odata4sparql:datasetPrefix :sop ;
+  odata4sparql:datasetPrefix :sopq ;
+  odata4sparql:datasetPrefix odata4sparql:FOAF ;
+  odata4sparql:datasetPrefix odata4sparql:OWL ;
+  odata4sparql:datasetPrefix odata4sparql:RDFS ;
+  odata4sparql:datasetPrefix odata4sparql:SKOS ;   
+  odata4sparql:datasetPrefix odata4sparql:SEARCH ;  
+  odata4sparql:datasetPrefix odata4sparql:GEO ;
+  odata4sparql:datasetPrefix odata4sparql:QB ;
+  odata4sparql:datasetPrefix odata4sparql:PROV ;
+  odata4sparql:datasetPrefix odata4sparql:DATACUBE ;
+  odata4sparql:datasetPrefix odata4sparql:CONTEXTMENU ; 
+  odata4sparql:withRdfAnnotations "false"^^xsd:boolean ;
+  odata4sparql:withSapAnnotations "true"^^xsd:boolean ;
+  odata4sparql:withFKProperties "false"^^xsd:boolean ;
+  odata4sparql:useBaseType "false"^^xsd:boolean ;
+  odata4sparql:expandOperations "false"^^xsd:boolean ;
+  odata4sparql:textSearchType odata4sparql:RDF4J_Lucene ;
+.
+:rdf2model_Data
+  rdf:type rep:Repository ; 
+  rep:repositoryID "rdf2model_Data"^^xsd:string ;
+  rep:repositoryImpl :rdf2model_Data_Impl ;
+  rdfs:label "rdf2model Data"^^xsd:string ;
+.
+:rdf2model_Data_Impl
+  rdf:type openrdf:SPARQLRepository ;
+  odata4sparql:defaultQueryLimit 100000 ;
+  odata4sparql:sparqlProfile odata4sparql:RDF4J ;
+  rep:repositoryType openrdf:SPARQLRepository ;
+  sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/rdf2model?distinct=true>;
+  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/rdf2model> ;
+  rdfs:label "rdf2model Data Impl"^^xsd:string ;
+.
+:rdf2model_Vocabulary
+  rdf:type rep:Repository ;
+  rep:repositoryID "rdf2model_Vocabulary"^^xsd:string ;
+  rep:repositoryImpl :rdf2model_Vocabulary_Impl ;
+  rdfs:label "rdf2model Vocabulary"^^xsd:string ;
+.
+:rdf2model_Vocabulary_Impl
+  rdf:type openrdf:SPARQLRepository ;
+  odata4sparql:sparqlProfile odata4sparql:RDF4J ;
+  rep:repositoryType openrdf:SPARQLRepository ;
+  sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/rdf2model?infer=false> ;
+  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/rdf2model> ;
+  rdfs:label "rdf2model Vocabulary Impl"^^xsd:string ;
+.
+:londontube
+  rdf:type odata4sparql:Prefix ; 
+   odata4sparql:namespace <http://in4mium.com/londontube/id/> ;
+   odata4sparql:prefix "londontube"^^xsd:string ;
+ .
+:tfl
+  rdf:type odata4sparql:Dataset ;
+  rdf:type odata4sparql:Prefix ;
+  odata4sparql:datasetPrefix :tfl  ;
+  odata4sparql:defaultPrefix :tfl  ;
+  odata4sparql:namespace <http://in4mium.com/londontube/ref/> ;
+  odata4sparql:prefix "tfl"^^xsd:string ;
+  rdfs:label "tfl"^^xsd:string ;
+  odata4sparql:dataRepository :tfl_Data ;
+  odata4sparql:vocabularyRepository :tfl_Vocabulary ;
+  odata4sparql:datasetPrefix :londontube ;
+  odata4sparql:datasetPrefix odata4sparql:FOAF ;
+  odata4sparql:datasetPrefix odata4sparql:OWL ;
+  odata4sparql:datasetPrefix odata4sparql:RDFS ;
+  odata4sparql:datasetPrefix odata4sparql:SKOS ;   
+  odata4sparql:datasetPrefix odata4sparql:SEARCH ;  
+  odata4sparql:datasetPrefix odata4sparql:GEO ;
+  odata4sparql:datasetPrefix odata4sparql:QB ;
+  odata4sparql:datasetPrefix odata4sparql:PROV ;
+  odata4sparql:datasetPrefix odata4sparql:DATACUBE ;
+  odata4sparql:datasetPrefix odata4sparql:CONTEXTMENU ; 
+  odata4sparql:withRdfAnnotations "false"^^xsd:boolean ;
+  odata4sparql:withSapAnnotations "true"^^xsd:boolean ;
+  odata4sparql:withFKProperties "false"^^xsd:boolean ;
+  odata4sparql:useBaseType "false"^^xsd:boolean ;
+  odata4sparql:expandOperations "false"^^xsd:boolean ;
+  odata4sparql:textSearchType odata4sparql:RDF4J_Lucene ;
+.
+:tfl_Data
+  rdf:type rep:Repository ; 
+  rep:repositoryID "tfl_Data"^^xsd:string ;
+  rep:repositoryImpl :tfl_Data_Impl ;
+  rdfs:label "tfl Data"^^xsd:string ;
+.
+:tfl_Data_Impl
+  rdf:type openrdf:SPARQLRepository ;
+  odata4sparql:defaultQueryLimit 100000 ;
+  odata4sparql:sparqlProfile odata4sparql:RDF4J ;
+  rep:repositoryType openrdf:SPARQLRepository ;
+  sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/tfl?distinct=true>;
+  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/tfl> ;
+  rdfs:label "tfl Data Impl"^^xsd:string ;
+.
+:tfl_Vocabulary
+  rdf:type rep:Repository ;
+  rep:repositoryID "tfl_Vocabulary"^^xsd:string ;
+  rep:repositoryImpl :tfl_Vocabulary_Impl ;
+  rdfs:label "tfl Vocabulary"^^xsd:string ;
+.
+:tfl_Vocabulary_Impl
+  rdf:type openrdf:SPARQLRepository ;
+  odata4sparql:sparqlProfile odata4sparql:RDF4J ;
+  rep:repositoryType openrdf:SPARQLRepository ;
+  sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/tfl?infer=false> ;
+  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/tfl> ;
+  rdfs:label "tfl Vocabulary Impl"^^xsd:string ;
 .
