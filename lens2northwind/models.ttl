@@ -78,7 +78,7 @@
   odata4sparql:sparqlProfile odata4sparql:RDF4J ;
   rep:repositoryType openrdf:SPARQLRepository ;
   sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/northwind?distinct=true>;
-  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/northwind> ;
+  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/northwind/statements> ;
   rdfs:label "northwind Data Impl"^^xsd:string ;
 .
 :northwind_Vocabulary
@@ -91,8 +91,8 @@
   rdf:type openrdf:SPARQLRepository ;
   odata4sparql:sparqlProfile odata4sparql:RDF4J ;
   rep:repositoryType openrdf:SPARQLRepository ;
-  sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/northwind> ;
-  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/northwind> ;
+  sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/northwind?infer=false> ;
+  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/northwind/statements> ;
   rdfs:label "northwind Vocabulary Impl"^^xsd:string ;
 .
 
@@ -143,7 +143,7 @@
   odata4sparql:sparqlProfile odata4sparql:RDF4J ;
   rep:repositoryType openrdf:SPARQLRepository ;
   sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/BeCareLink?distinct=true>;
-  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/BeCareLink> ;
+  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/BeCareLink/statements> ;
   rdfs:label "BeCareLink Data Impl"^^xsd:string ;
 .
 :BeCareLink_Vocabulary
@@ -157,7 +157,7 @@
   odata4sparql:sparqlProfile odata4sparql:RDF4J ;
   rep:repositoryType openrdf:SPARQLRepository ;
   sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/BeCareLink?infer=false> ;
-  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/BeCareLink> ;
+  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/BeCareLink/statements> ;
   rdfs:label "cust360 Vocabulary Impl"^^xsd:string ;
 .
 :SWTTHES
@@ -213,7 +213,7 @@
   odata4sparql:sparqlProfile odata4sparql:RDF4J ;
   rep:repositoryType openrdf:SPARQLRepository ;
   sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/STW?distinct=true>;
-  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/STW> ;
+  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/STW/statements> ;
   rdfs:label "STW Data Impl"^^xsd:string ;
 .
 :STW_Vocabulary
@@ -227,7 +227,7 @@
   odata4sparql:sparqlProfile odata4sparql:RDF4J ;
   rep:repositoryType openrdf:SPARQLRepository ;
   sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/STW?infer=false> ;
-  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/STW> ;
+  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/STW/statements> ;
   rdfs:label "STW Vocabulary Impl"^^xsd:string ;
 .
 :CDATA
@@ -274,7 +274,7 @@
   odata4sparql:sparqlProfile odata4sparql:RDF4J ;
   rep:repositoryType openrdf:SPARQLRepository ;
   sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/cofid?distinct=true>;
-  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/cofid> ;
+  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/cofid/statements> ;
   rdfs:label "COFID Data Impl"^^xsd:string ;
 .
 :COFID_Vocabulary
@@ -288,7 +288,7 @@
   odata4sparql:sparqlProfile odata4sparql:RDF4J ;
   rep:repositoryType openrdf:SPARQLRepository ;
   sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/cofid?infer=false> ;
-  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/cofid> ;
+  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/cofid/statements> ;
   rdfs:label "COFID Vocabulary Impl"^^xsd:string ;
 .
 :s
@@ -354,7 +354,7 @@
   odata4sparql:sparqlProfile odata4sparql:RDF4J ;
   rep:repositoryType openrdf:SPARQLRepository ;
   sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/rdf2model?distinct=true>;
-  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/rdf2model> ;
+  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/rdf2model/statements> ;
   rdfs:label "rdf2model Data Impl"^^xsd:string ;
 .
 :rdf2model_Vocabulary
@@ -368,7 +368,7 @@
   odata4sparql:sparqlProfile odata4sparql:RDF4J ;
   rep:repositoryType openrdf:SPARQLRepository ;
   sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/rdf2model?infer=false> ;
-  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/rdf2model> ;
+  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/rdf2model/statements> ;
   rdfs:label "rdf2model Vocabulary Impl"^^xsd:string ;
 .
 :londontube
@@ -416,7 +416,7 @@
   odata4sparql:sparqlProfile odata4sparql:RDF4J ;
   rep:repositoryType openrdf:SPARQLRepository ;
   sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/tfl?distinct=true>;
-  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/tfl> ;
+  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/tfl/statements> ;
   rdfs:label "tfl Data Impl"^^xsd:string ;
 .
 :tfl_Vocabulary
@@ -430,6 +430,6 @@
   odata4sparql:sparqlProfile odata4sparql:RDF4J ;
   rep:repositoryType openrdf:SPARQLRepository ;
   sparql:query-endpoint <http://localhost:8080/rdf4j-server/repositories/tfl?infer=false> ;
-  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/tfl> ;
+  sparql:update-endpoint <http://localhost:8080/rdf4j-server/repositories/tfl/statements> ;
   rdfs:label "tfl Vocabulary Impl"^^xsd:string ;
 .
